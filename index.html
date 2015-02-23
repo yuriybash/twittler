@@ -26,6 +26,31 @@
 
         updateTweets();
 
+        $('.link').on('click', function(){
+          var username = this.text.slice(1, this.text.length - 2);
+          $body.html('');
+
+          for(var x in streams.users){
+            if(username == x){
+              console.log(streams.users[x]);
+
+              //streams.users[x] looks like: [Object, Object];
+              //
+
+              for(var y = 0; y < streams.users[x].length; y++){
+                  var $tweet2 = $('<div></div>');
+                  console.log(streams.users[x][y]["message"]);
+                  $tweet2.text('@' + username + ': ' + streams.users[x][y]["message"] + "             - tweeted @ " + streams.users[x][y]["created_at"]);
+                  $tweet2.appendTo($body);
+              }
+
+            }
+          }
+
+
+
+        })
+
         
 
 
@@ -33,15 +58,16 @@
 
       function updateTweets(){
             
-            console.log(streams.home.length);
-            console.log(streams.home);
+            // console.log(streams.home.length);
+            // console.log(streams.home);
 
             for(var x = streams.home.length - 1; x >= first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
-                var link = $("<a href='#'>" + "@" + tweet.user + ": " + "</a>");
+                var $link = $("<a href='#'>" + "@" + tweet.user + ": " + "</a>");
+                $link.addClass("link");
                 $tweet.text(tweet.message + " - tweeted @ " + tweet.created_at);
-                $tweet.prepend(link);
+                $tweet.prepend($link);
                 $tweet.appendTo($('body'));
             }
 
