@@ -19,7 +19,7 @@
         while(index >= 0){
           var tweet = streams.home[index];
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message);
+          $tweet.text('@' + tweet.user + ': ' + tweet.message + "             - tweeted @ " + tweet.created_at);
           $tweet.appendTo($body);
           index -= 1;
         }
@@ -42,7 +42,7 @@
             for(var x = latest; x > first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + ': ' + tweet.message);
+                $tweet.text('@' + tweet.user + ': ' + tweet.message + "\t\t- tweeted @ " + tweet.created_at);
                 $tweet.appendTo($('body'));
             }
 
