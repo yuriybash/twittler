@@ -8,43 +8,41 @@
   <button id="new_tweets"> New tweets? </button>
     <script>
       $("#new_tweets").on("click", updateTweets);
-      var latest;
-      var first_undisplayed = streams.home.length;
+      var latest = streams.home.length - 1;
+      var first_undisplayed = 0;
 
       $(document).ready(function(){
         var $body = $('body');
         // $body.html('');
 
-        var index = streams.home.length - 1;
-        while(index >= 0){
-          var tweet = streams.home[index];
-          var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ': ' + tweet.message + "             - tweeted @ " + tweet.created_at);
-          $tweet.appendTo($body);
-          index -= 1;
-        }
+        // var index = streams.home.length - 1;
+        // while(index >= 0){
+        //   var tweet = streams.home[index];
+        //   var $tweet = $('<div></div>');
+        //   $tweet.text('@' + tweet.user + ': ' + tweet.message + "             - tweeted @ " + tweet.created_at);
+        //   $tweet.appendTo($body);
+        //   index -= 1;
+        // }
 
-
+        updateTweets();
 
         
-
-
-
-
 
 
       });
 
       function updateTweets(){
-            first_undisplayed = latest + 1;
-            latest = streams.home.length - 1;
+            
 
-            for(var x = latest; x > first_undisplayed; x--){
+
+            for(var x = streams.home.length - 1; x > first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
                 $tweet.text('@' + tweet.user + ': ' + tweet.message + "\t\t- tweeted @ " + tweet.created_at);
                 $tweet.appendTo($('body'));
             }
+
+            first_undisplayed = streams.home.length;
 
         }
 
