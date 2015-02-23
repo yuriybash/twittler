@@ -8,7 +8,7 @@
   <button id="new_tweets"> New tweets? </button>
     <script>
       $("#new_tweets").on("click", updateTweets);
-      var latest = streams.home.length - 1;
+
       var first_undisplayed = 0;
 
       $(document).ready(function(){
@@ -33,12 +33,15 @@
 
       function updateTweets(){
             
+            console.log(streams.home.length);
+            console.log(streams.home);
 
-
-            for(var x = streams.home.length - 1; x > first_undisplayed; x--){
+            for(var x = streams.home.length - 1; x >= first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
-                $tweet.text('@' + tweet.user + ': ' + tweet.message + "\t\t- tweeted @ " + tweet.created_at);
+                var link = $("<a href='#'>" + "@" + tweet.user + ": " + "</a>");
+                $tweet.text(tweet.message + " - tweeted @ " + tweet.created_at);
+                $tweet.prepend(link);
                 $tweet.appendTo($('body'));
             }
 
