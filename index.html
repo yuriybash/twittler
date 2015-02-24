@@ -8,33 +8,29 @@
   <body>
   <button id="new_tweets"> New tweets? </button>
     <script>
-      $("#new_tweets").on("click", updateTweets);
-      $("#return").on("click", function(){
-          console.log("TEST");
-          // $body.html(''); 
-          // updateTweets()
-      })
+      
+      
 
       var first_undisplayed = 0;
 
       $(document).ready(function(){
         var $body = $('body');
-        // $body.html('');
+        $(document.body).on("click", '#new_tweets', updateTweets);
 
-        // var index = streams.home.length - 1;
-        // while(index >= 0){
-        //   var tweet = streams.home[index];
-        //   var $tweet = $('<div></div>');
-        //   $tweet.text('@' + tweet.user + ': ' + tweet.message + "             - tweeted @ " + tweet.created_at);
-        //   $tweet.appendTo($body);
-        //   index -= 1;
-        // }
+        $(document.body).on("click", "#return", function(){
+          
+           $body.html(''); 
+           var $new_tweets = $('<button>New tweets?</button>');
+           $new_tweets.attr('id', 'new_tweets')
+           $new_tweets.appendTo($body);
+           updateTweets()
+      })
 
         updateTweets();
 
         $(document.body).on('click', '.user', displayTimeline)
         function displayTimeline(){
-          console.log("USER CLICK HANDLER WORKED");
+          
           var username = this.innerHTML.slice(1, this.innerHTML.length - 2);
           $body.html('');
           for(var x in streams.users){
@@ -60,7 +56,7 @@
 
               var $return_home = $('<button>Go home</button>');
                   $return_home.attr('id', 'return')
-                  $return_home.appendTo($body);
+                  $return_home.prependTo($body);
 
             }
           }
