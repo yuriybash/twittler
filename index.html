@@ -3,11 +3,17 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="twittler.css">
   </head>
   <body>
   <button id="new_tweets"> New tweets? </button>
     <script>
       $("#new_tweets").on("click", updateTweets);
+      $("#return").on("click", function(){
+          console.log("TEST");
+          // $body.html(''); 
+          // updateTweets()
+      })
 
       var first_undisplayed = 0;
 
@@ -26,48 +32,57 @@
 
         updateTweets();
 
-        $('.link').on('click', function(){
-          var username = this.text.slice(1, this.text.length - 2);
+        $(document.body).on('click', '.user', displayTimeline)
+        function displayTimeline(){
+          console.log("USER CLICK HANDLER WORKED");
+          var username = this.innerHTML.slice(1, this.innerHTML.length - 2);
           $body.html('');
-
           for(var x in streams.users){
             if(username == x){
-              console.log(streams.users[x]);
+              //console.log(streams.users[x]);
 
               //streams.users[x] looks like: [Object, Object];
               //
 
               for(var y = 0; y < streams.users[x].length; y++){
                   var $tweet2 = $('<div></div>');
-                  console.log(streams.users[x][y]["message"]);
-                  $tweet2.text('@' + username + ': ' + streams.users[x][y]["message"] + "             - tweeted @ " + streams.users[x][y]["created_at"]);
+                  //console.log(streams.users[x][y]["message"]);
+                  $tweet2.text(streams.users[x][y]["message"] + "             - tweeted @ " + streams.users[x][y]["created_at"]);
+
+                var $user2 = $('<span></span>');
+                $user2.addClass("user");
+                $user2.text("@" + username + ": ")
+
+                $tweet2.prepend($user2);
+
                   $tweet2.appendTo($body);
               }
+
+              var $return_home = $('<button>Go home</button>');
+                  $return_home.attr('id', 'return')
+                  $return_home.appendTo($body);
 
             }
           }
 
-
-
-        })
-
-        
-
-
+        }
       });
 
       function updateTweets(){
             
-            // console.log(streams.home.length);
-            // console.log(streams.home);
+            
 
             for(var x = streams.home.length - 1; x >= first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
-                var $link = $("<a href='#'>" + "@" + tweet.user + ": " + "</a>");
-                $link.addClass("link");
+
                 $tweet.text(tweet.message + " - tweeted @ " + tweet.created_at);
-                $tweet.prepend($link);
+                
+                var $user = $('<span></span>');
+                $user.addClass("user");
+                $user.text("@" + tweet.user + ": ")
+
+                $tweet.prepend($user);
                 $tweet.appendTo($('body'));
             }
 
