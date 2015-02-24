@@ -5,5 +5,7 @@ html {
 }
 
 .user {
-	color: blue
+	color: blue;
+	cursor: pointer;
 }
+
