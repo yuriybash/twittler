@@ -9,3 +9,16 @@ html {
 	cursor: pointer;
 }
 
+div {
+	text-align: center;
+}
+
+div:hover {
+	background-color: #EBEBE6;
+}
+
+button {
+	vertical-align: middle;
+	margin-top: 30px;
+	margin-bottom: 25px;
+}

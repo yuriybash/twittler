@@ -3,10 +3,13 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" href="bootstrap\css\bootstrap.css">
     <link rel="stylesheet" href="twittler.css">
   </head>
   <body>
+  <div>
   <button id="new_tweets"> New tweets? </button>
+  </div>
     <script>
       
       
@@ -71,6 +74,7 @@
             for(var x = streams.home.length - 1; x >= first_undisplayed; x--){
                 var tweet = streams.home[x];
                 var $tweet = $('<div></div>');
+                $tweet.addClass('list-group-item');
 
                 $tweet.text(tweet.message + " - tweeted @ " + tweet.created_at);
                 
